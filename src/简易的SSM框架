@@ -1,2 +1,9 @@
 http://www.makeru.com.cn/dot/38180.html
 简易的SSM框架
+1.引入ssm框架所需的依赖
+2.创建mvc思想所需的包（controller dao pojo service...）
+3.配置mybatis.xml(暂时可以什么都不写,但是要说明是mybatis的配置文件)
+4.配置spring.xml(为了让项目看起来清晰一点  spring整个springmvc  spring整合mybatis都放在这个配置文件里面)
+5.如何使用properties来加载连接数据库四大参数的话，就新建jdbc.properties,如果没有，第五步就是配置web.xml
+6.配置web.xml(ssm框架已经搭建)、
+    web.xml的必要配置：1.扫描xml文件 2.初始化IOC容器 3.配置前端转发器DispatcherServlet

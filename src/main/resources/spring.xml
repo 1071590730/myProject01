@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	">
+
+    <!--扫描控制层和业务层   扫描控制层：识别里面的一些注解，并把控制层作为中间转发器
+        扫描业务层：识别里面的注解 并把该类的对象交给ioc容器   以便后面使用时自动注入出来
+    -->
+    <context:component-scan base-package="com.fs.controller"></context:component-scan>
+    <context:component-scan base-package="com.fs.service.impl"></context:component-scan>
+
+    <!--扫描控制层注解-->
+    <context:annotation-config></context:annotation-config>
+    <!--sping整合mybatis开始-->
+        <!--加载jdbc.properties-->
+     <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+
+    <!--使用c3p0配置数据源  将配置好的数据源注入到ioc容器-->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${driver}"></property>
+        <property name="jdbcUrl" value="${url}"></property>
+        <property name="user" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+        <!--还可以配置连接池一些配置-->
+    </bean>
+
+    <!--配置sqlSessionFactoryBean  注入ioc容器-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--引入配置好的数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--扫描关于mybatis相关的配置文件  mybatis.xml-->
+        <property name="configLocation" value="classpath:mybatis.xml"></property>
+        <!--扫描实现了dao接口的xml的位置-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+    </bean>
+    <!--配置MapperScannerConfigurer  扫描dao层 以便于将dao层接口对象注入到ioc容器  后面就用自动注入的方法取出来-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--扫描dao接口 并注入到ioc容器-->
+        <property name="basePackage" value="com.fs.dao"></property>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+    <!--sping整合mybatis结束-->
+
+    <!--spring mvc配置开始-->
+    <!--因为spring-webmvc架包里面有一个文件DispatcherServlet.properties已经有了一些固定配置
+    所以只需要配置视图解析器即可
+    -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"  p:prefix="/WEB-INF/" p:suffix=".jsp"></bean>
+
+    <!--注解驱动  让控制层的注解生效-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!--spring mvc配置结束-->
+
+</beans>
