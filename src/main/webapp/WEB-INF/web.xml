@@ -4,7 +4,7 @@
   <!--1.扫描xml文件-->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:spring.xml</param-value>
+    <param-value>classpath:spring.xml,classpath:spring-shiro.xml</param-value>
   </context-param>
   <!--2.初始化IOC容器-->
   <listener>
@@ -55,4 +55,20 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <!-- Shiro Filter is defined in the spring application context: -->
+  <!--配置shiro过滤器-->
+  <filter>
+<!--    名字shiroFilter必须与spring-shiro.xml里面的过滤器一样-->
+    <filter-name>shiroFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+      <param-name>targetFilterLifecycle</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>shiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>

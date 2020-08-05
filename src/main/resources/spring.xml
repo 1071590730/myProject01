@@ -38,7 +38,7 @@
         <!--扫描关于mybatis相关的配置文件  mybatis.xml-->
         <property name="configLocation" value="classpath:mybatis.xml"></property>
         <!--扫描实现了dao接口的xml的位置-->
-        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+<!--        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>-->
     </bean>
     <!--配置MapperScannerConfigurer  扫描dao层 以便于将dao层接口对象注入到ioc容器  后面就用自动注入的方法取出来-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

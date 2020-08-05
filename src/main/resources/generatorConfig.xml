@@ -13,11 +13,11 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/paper" userId="root" password="root" />
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/chinancp" userId="root" password="root" />
         <!-- 生成实体类 实体bean文件 -->
         <javaModelGenerator targetPackage="com.wjb.pojo" targetProject="src/main/java/" />
         <!-- mapper xml文件 -->
-        <sqlMapGenerator targetPackage="dao" targetProject="src/main/resources/" />
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources/" />
         <!-- mapper 接口文件 -->
         <javaClientGenerator targetPackage="com.wjb.dao" targetProject="src/main/java/" type="XMLMAPPER" />
 
@@ -29,7 +29,7 @@
 <!--        <table tableName="paper" domainObjectName="Paper"-->
 <!--               enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
 <!--               enableUpdateByExample="false" selectByExampleQueryId="false"></table>-->
-        <table tableName="user" domainObjectName="User"
+        <table tableName="user1" domainObjectName="User1"
                enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false" selectByExampleQueryId="false"></table>
 
