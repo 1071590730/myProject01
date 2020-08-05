@@ -13,8 +13,8 @@
     <!--扫描控制层和业务层   扫描控制层：识别里面的一些注解，并把控制层作为中间转发器
         扫描业务层：识别里面的注解 并把该类的对象交给ioc容器   以便后面使用时自动注入出来
     -->
-    <context:component-scan base-package="com.fs.controller"></context:component-scan>
-    <context:component-scan base-package="com.fs.service.impl"></context:component-scan>
+    <context:component-scan base-package="com.wjb.controller"></context:component-scan>
+    <context:component-scan base-package="com.wjb.service.impl"></context:component-scan>
 
     <!--扫描控制层注解-->
     <context:annotation-config></context:annotation-config>
@@ -43,7 +43,7 @@
     <!--配置MapperScannerConfigurer  扫描dao层 以便于将dao层接口对象注入到ioc容器  后面就用自动注入的方法取出来-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--扫描dao接口 并注入到ioc容器-->
-        <property name="basePackage" value="com.fs.dao"></property>
+        <property name="basePackage" value="com.wjb.dao"></property>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
     <!--sping整合mybatis结束-->
